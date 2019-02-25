@@ -3,15 +3,13 @@ package com.en.sphzb.service.impl;
 import com.en.sphzb.entity.AnswerRecord;
 import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
+import com.en.sphzb.entity.mapper.AnswerStatMapper;
 import com.en.sphzb.repository.AnswerRecordRepository;
-import com.en.sphzb.repository.AnswerStatRepository;
 import com.en.sphzb.repository.QuestionsRepository;
 import com.en.sphzb.service.QuestionService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class QuestionServiceImpl implements QuestionService {
     private AnswerRecordRepository answerRecordRepository;
 
     @Autowired
-    private AnswerStatRepository answerStatRepository;
+    private AnswerStatMapper answerStatMapper;
 
     @Override
     public Question getQuestion() {
@@ -50,8 +48,14 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Page<AnswerStat> getStat(PageRequest page) {
-        Page<AnswerStat> all = answerStatRepository.findAll(page);
+    public Page<AnswerStat> getStat(int page, int size) {
+        int count = answerStatMapper.count();
+        if (count == 0) {
+            return null;
+        }
+        int begin = (page -  1) * size + 1;
+        int end = page * size;
+        
         return all;
     }
 
