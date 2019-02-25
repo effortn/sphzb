@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.en.sphzb.entity.mapper.AnswerStatMapper" >
+
+    <resultMap id="answerStatVO" type="com.en.sphzb.VO.AnswerStatVO">
+        <id column="stat_id" property="statId" jdbcType="INTEGER"/>
+        <id column="question_id" property="questionId" jdbcType="INTEGER"/>
+        <id column="question_content" property="questionContent" jdbcType="VARCHAR"/>
+        <id column="total_answer" property="totalAnswer" jdbcType="INTEGER"/>
+        <id column="answer_a" property="answerA" jdbcType="VARCHAR"/>
+        <id column="choice_a" property="choiceA" jdbcType="INTEGER"/>
+        <id column="answer_b" property="answerB" jdbcType="VARCHAR"/>
+        <id column="choice_b" property="choiceB" jdbcType="INTEGER"/>
+        <id column="answer_c" property="answerC" jdbcType="VARCHAR"/>
+        <id column="choice_c" property="choiceC" jdbcType="INTEGER"/>
+        <id column="answer_d" property="answerD" jdbcType="VARCHAR"/>
+        <id column="choice_d" property="choiceD" jdbcType="INTEGER"/>
+        <id column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectStatByPage" resultMap="answerStatVO">
+        SELECT
+	      a.stat_id,a.question_id,q.question_content,a.total_answer,a.choice_a, a.choice_b, a.choice_c,a.choice_d,
+	      q.answer_a,q.answer_b,q.answer_c,q.answer_d,a.remark
+        FROM answer_stat a, question q
+        WHERE a.question_id = q.question_id
+        ORDER BY a.total_answer desc
+        limit #{begin}, #{end}
+    </select>
+
+</mapper>

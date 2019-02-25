@@ -1,5 +1,6 @@
 package com.en.sphzb.service.impl;
 
+import com.en.sphzb.VO.AnswerStatVO;
 import com.en.sphzb.entity.AnswerRecord;
 import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
@@ -10,6 +11,8 @@ import com.en.sphzb.service.QuestionService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,15 +51,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Page<AnswerStat> getStat(int page, int size) {
+    public Page<AnswerStatVO> getStat(int page, int size) {
         int count = answerStatMapper.count();
-        if (count == 0) {
-            return null;
-        }
+        if (count == 0)
+            count = 1;
         int begin = (page -  1) * size + 1;
         int end = page * size;
-        
-        return all;
+        List<AnswerStatVO> answerStatVOList = answerStatMapper.selectStatByPage(begin, end);
+        PageImpl<AnswerStatVO> result = new PageImpl<>(answerStatVOList, PageRequest.of(page, size), count);
+        return result;
     }
 
 }

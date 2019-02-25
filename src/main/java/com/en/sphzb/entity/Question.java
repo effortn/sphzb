@@ -36,25 +36,25 @@ public class Question {
      * 答案A
      */
     @Column(name = "answer_a")
-    private Integer answerA;
+    private String answerA;
 
     /**
      * 答案B
      */
     @Column(name = "answer_b")
-    private Integer answerB;
+    private String answerB;
 
     /**
      * 答案C
      */
     @Column(name = "answer_c")
-    private Integer answerC;
+    private String answerC;
 
     /**
      * 答案D
      */
     @Column(name = "answer_d")
-    private Integer answerD;
+    private String answerD;
 
     /**
      * 题目状态，0：失效，1：有效，2：已存在正确答案
