@@ -11,3 +11,5 @@ spring:
 server:
   servlet:
     context-path: /sphzb
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

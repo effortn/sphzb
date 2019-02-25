@@ -1,5 +1,6 @@
 package com.en.sphzb.service;
 
+import com.en.sphzb.VO.AnswerStatVO;
 import com.en.sphzb.entity.AnswerRecord;
 import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
@@ -32,6 +33,6 @@ public interface QuestionService {
     AnswerRecord saveAnswer(String ip, String user, Long questionId, String answer);
 
 
-    Page<AnswerStat> getStat(PageRequest page);
+    Page<AnswerStatVO> getStat(int page, int size);
 
 }

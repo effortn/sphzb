@@ -10,6 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 public interface CaseService {
 
+    /**
+     * 案件上传，保存到数据库
+     * @param file      上传的数据文件
+     * @return
+     */
     ResultVO uploadCases(MultipartFile file);
 
 

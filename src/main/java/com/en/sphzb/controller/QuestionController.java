@@ -1,5 +1,6 @@
 package com.en.sphzb.controller;
 
+import com.en.sphzb.VO.AnswerStatVO;
 import com.en.sphzb.VO.ResultVO;
 import com.en.sphzb.entity.AnswerRecord;
 import com.en.sphzb.entity.AnswerStat;
@@ -56,11 +57,10 @@ public class QuestionController {
     public ModelAndView stat(@RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                        Map<String, Object> map){
-        Sort.Direction direction = Sort.Direction.DESC;
-        Sort sort = new Sort(direction, "totalAnswer");
-        PageRequest pageRequest = PageRequest.of(page - 1, size, sort);
-        Page<AnswerStat> stat = questionService.getStat(pageRequest);
+        Page<AnswerStatVO> stat = questionService.getStat(page, size);
         map.put("statPage", stat);
+        map.put("currentPage", page);
+        map.put("size", size);
         return new ModelAndView("stat", map);
     }
 
