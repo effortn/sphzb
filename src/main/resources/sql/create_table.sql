@@ -15,7 +15,7 @@ create table `case` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='案件表';
 
 -- 创建题目表
-create table questions (
+create table question (
   question_id BIGINT NOT NULL AUTO_INCREMENT COMMENT '题目ID',
   case_id BIGINT NOT NULL COMMENT '案件ID',
   question_content VARCHAR(4000) COMMENT '题目内容',

@@ -2,6 +2,7 @@ package com.en.sphzb.entity;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
@@ -34,21 +35,25 @@ public class Question {
     /**
      * 答案A
      */
+    @Column(name = "answer_a")
     private Integer answerA;
 
     /**
      * 答案B
      */
+    @Column(name = "answer_b")
     private Integer answerB;
 
     /**
      * 答案C
      */
+    @Column(name = "answer_c")
     private Integer answerC;
 
     /**
      * 答案D
      */
+    @Column(name = "answer_d")
     private Integer answerD;
 
     /**

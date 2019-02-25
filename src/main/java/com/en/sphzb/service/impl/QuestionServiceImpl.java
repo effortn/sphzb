@@ -1,15 +1,17 @@
 package com.en.sphzb.service.impl;
 
 import com.en.sphzb.entity.AnswerRecord;
+import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
 import com.en.sphzb.repository.AnswerRecordRepository;
+import com.en.sphzb.repository.AnswerStatRepository;
 import com.en.sphzb.repository.QuestionsRepository;
 import com.en.sphzb.service.QuestionService;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimePrinter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private AnswerRecordRepository answerRecordRepository;
+
+    @Autowired
+    private AnswerStatRepository answerStatRepository;
 
     @Override
     public Question getQuestion() {
@@ -42,6 +47,12 @@ public class QuestionServiceImpl implements QuestionService {
         answerRecord.setQuestionId(questionId);
         answerRecord.setUserCode(user);
         return answerRecordRepository.save(answerRecord);
+    }
+
+    @Override
+    public Page<AnswerStat> getStat(PageRequest page) {
+        Page<AnswerStat> all = answerStatRepository.findAll(page);
+        return all;
     }
 
 }
