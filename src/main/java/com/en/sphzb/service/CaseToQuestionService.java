@@ -1,6 +1,6 @@
 package com.en.sphzb.service;
 
-import com.en.sphzb.entity.Case;
+import com.en.sphzb.entity.Cases;
 import com.en.sphzb.entity.mapper.CaseMapper;
 import com.en.sphzb.repository.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.en.sphzb.service.impl;
 
 import com.en.sphzb.VO.ResultVO;
-import com.en.sphzb.entity.Case;
+import com.en.sphzb.entity.Cases;
 import com.en.sphzb.repository.CaseRepository;
 import com.en.sphzb.service.CaseService;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -13,8 +13,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.en.sphzb.dto.CommonUtils;
+import com.en.sphzb.dto.DateUtils;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,12 +44,11 @@ public class CaseServiceImpl implements CaseService {
                 return resultVO;
             }
             if (null!=workbook.getSheetAt(0)){
-                List<Case> casesLst = new ArrayList<Case>();
+                List<Cases> casesLst = new ArrayList<Cases>();
                 for (int ruwNumOfSheet =1;ruwNumOfSheet<=workbook.getSheetAt(0).getLastRowNum();ruwNumOfSheet++){
                     if(null!=workbook.getSheetAt(0).getRow(ruwNumOfSheet)){
                         Row row = workbook.getSheetAt(0).getRow(ruwNumOfSheet);
-                        Case acase = new Case();
-                        System.out.print(row.getLastCellNum());
+                        Cases acase = new Cases();
                         for (int cellNumOfRow=0;cellNumOfRow<row.getLastCellNum();cellNumOfRow++){
                             Cell cell =row.getCell(cellNumOfRow);
                             String cellValue = "";
@@ -96,13 +97,16 @@ public class CaseServiceImpl implements CaseService {
                                     }
                                 }
                             }
-                            casesLst.add(acase);
+                            //acase.setCaseId(Long.parseLong(CommonUtils.getUUID()));
+                            //String dateStr = DateUtils.getCurDate().
+                            acase.setCreateTime(DateUtils.getCurDate());
                         }
+
+                        caseRepository.save(acase);
                     }
-                    caseRepository.saveAll(casesLst);
-                    ResultVO resultVO = new ResultVO(0,"保存成功");
-                    return resultVO;
                 }
+                ResultVO resultVO = new ResultVO(0,"保存成功");
+                return resultVO;
             }
         }catch (Exception e){
             e.printStackTrace();
