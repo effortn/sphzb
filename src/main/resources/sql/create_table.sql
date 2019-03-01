@@ -6,7 +6,11 @@ USE sphzb;
 
 -- 创建案件表
 create table `cases` (
+<<<<<<< HEAD
   case_id BIGINT NOT NULL AUTO_INCREMENT COMMENT '案件ID',
+=======
+  `case_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '案件ID',
+>>>>>>> 2991ad825f826d5057bab562fe48c2ce836f9b5e
   case_code VARCHAR(64) NOT NULL COMMENT '案件编号',
   case_description VARCHAR(4000) NOT NULL COMMENT '案件案情',
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '案件创建时间',

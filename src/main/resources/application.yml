@@ -1,8 +1,13 @@
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 200MB
   datasource:
     url: jdbc:mysql://127.0.0.1/sphzb?characterEncoding=utf-8
     username: root
-    password: feng9402
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

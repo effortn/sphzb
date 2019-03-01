@@ -1,8 +1,12 @@
 package com.en.sphzb.service;
 
+<<<<<<< HEAD
 import com.en.sphzb.entity.Case;
 import com.en.sphzb.entity.CaseType;
 import com.en.sphzb.entity.Question;
+=======
+import com.en.sphzb.entity.Cases;
+>>>>>>> 2991ad825f826d5057bab562fe48c2ce836f9b5e
 import com.en.sphzb.entity.mapper.CaseMapper;
 import com.en.sphzb.repository.CaseRepository;
 import com.en.sphzb.repository.CaseTypeRepository;
