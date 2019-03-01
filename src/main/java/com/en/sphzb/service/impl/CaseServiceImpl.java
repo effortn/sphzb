@@ -52,7 +52,7 @@ public class CaseServiceImpl implements CaseService {
                         for (int cellNumOfRow=0;cellNumOfRow<row.getLastCellNum();cellNumOfRow++){
                             Cell cell =row.getCell(cellNumOfRow);
                             String cellValue = "";
-                            if (null != cell) {
+                           /* if (null != cell) {
                                 // 以下是判断数据的类型
                                 switch (cell.getCellType()) {
                                     case HSSFCell.CELL_TYPE_NUMERIC: // 数字
@@ -79,7 +79,7 @@ public class CaseServiceImpl implements CaseService {
                                         cellValue = "未知类型";
                                         break;
                                 }
-                            }
+                            }*/
 
                             if(cellNumOfRow==0){
                                 if(cell!=null&&!cell.toString().trim().isEmpty()){
