@@ -5,7 +5,7 @@ CREATE DATABASE sphzb;
 USE sphzb;
 
 -- 创建案件表
-create table `case` (
+create table `cases` (
   case_id BIGINT NOT NULL AUTO_INCREMENT COMMENT '案件ID',
   case_code VARCHAR(64) NOT NULL COMMENT '案件编号',
   case_description VARCHAR(4000) NOT NULL COMMENT '案件案情',
@@ -19,10 +19,10 @@ create table question (
   question_id BIGINT NOT NULL AUTO_INCREMENT COMMENT '题目ID',
   case_id BIGINT NOT NULL COMMENT '案件ID',
   question_content VARCHAR(4000) COMMENT '题目内容',
-  answer_a VARCHAR(32) NOT NULL COMMENT '选项A',
-  answer_b VARCHAR(32) NOT NULL COMMENT '选项B',
-  answer_c VARCHAR(32) NOT NULL COMMENT '选项C',
-  answer_d VARCHAR(32) NOT NULL COMMENT '选项D',
+  answer_a VARCHAR(64) NOT NULL COMMENT '选项A',
+  answer_b VARCHAR(64) NOT NULL COMMENT '选项B',
+  answer_c VARCHAR(64) NOT NULL COMMENT '选项C',
+  answer_d VARCHAR(64) NOT NULL COMMENT '选项D',
   status SMALLINT NOT NULL COMMENT '题目状态，0：失效，1：有效，2：已存在正确答案',
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '题目创建时间',
   PRIMARY KEY (question_id),

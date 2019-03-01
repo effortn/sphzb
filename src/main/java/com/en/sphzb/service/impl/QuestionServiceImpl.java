@@ -2,7 +2,6 @@ package com.en.sphzb.service.impl;
 
 import com.en.sphzb.VO.AnswerStatVO;
 import com.en.sphzb.entity.AnswerRecord;
-import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
 import com.en.sphzb.entity.mapper.AnswerStatMapper;
 import com.en.sphzb.repository.AnswerRecordRepository;

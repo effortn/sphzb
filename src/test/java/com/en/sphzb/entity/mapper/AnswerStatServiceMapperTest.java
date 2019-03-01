@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AnswerStatMapperTest extends SphzbApplicationTests {
+public class AnswerStatServiceMapperTest extends SphzbApplicationTests {
 
     @Autowired
     private AnswerStatMapper mapper;

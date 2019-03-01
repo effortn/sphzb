@@ -2,9 +2,7 @@ package com.en.sphzb.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -20,6 +18,7 @@ public class Question {
      * 题目主键
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
 
     /**
