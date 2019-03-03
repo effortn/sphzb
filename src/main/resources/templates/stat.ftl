@@ -15,32 +15,31 @@
 					<thead>
 					<tr>
 						<th>题目</th>
-						<th>答题总次数</th>
+						<th>总次数</th>
 						<th>选项A</th>
-						<th>选A次数</th>
+						<th>选A次</th>
 						<th>选项B</th>
-						<th>选B次数</th>
+						<th>选B次</th>
 						<th>选项C</th>
-                        <th>选C次数</th>
+                        <th>选C次</th>
                         <th>选项D</th>
-                        <th>选D次数</th>
+                        <th>选D次</th>
 					</tr>
 					</thead>
 					<tbody>
 
 					<#list statPage.content as statVO>
 					<tr>
-						<td>${statVO.questionContent}</td>
+						<td title="${statVO.questionContent}" onclick="showDescription(this, this.title)" style="color: #9d9d9d;"><a>(查看案情，点击显示)</a></td>
 						<td>${statVO.totalAnswer}</td>
 						<td>${statVO.answerA}</td>
 						<td>${statVO.choiceA}</td>
 						<td>${statVO.answerB}</td>
                         <td>${statVO.choiceB}</td>
-                        <td>${statVO.answerB}</td>
-                        <td>${statVO.choiceC}</td>
                         <td>${statVO.answerC}</td>
-                        <td>${statVO.choiceD}</td>
+                        <td>${statVO.choiceC}</td>
                         <td>${statVO.answerD}</td>
+                        <td>${statVO.choiceD}</td>
 					</tr>
 					</#list>
 					</tbody>
@@ -74,5 +73,10 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function showDescription(dom, desr) {
+		dom.innerHTML = desr;
+    }
+</script>
 </body>
 </html>

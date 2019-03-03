@@ -24,7 +24,7 @@
         FROM answer_stat a, question q
         WHERE a.question_id = q.question_id
         ORDER BY a.total_answer desc
-        limit #{begin}, #{end}
+        limit #{begin}, #{size}
     </select>
 
 </mapper>

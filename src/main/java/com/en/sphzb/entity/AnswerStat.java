@@ -2,9 +2,7 @@ package com.en.sphzb.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 答题结果统计表
@@ -19,6 +17,7 @@ public class AnswerStat {
      * 统计主键
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long statId;
 
     /**
@@ -29,31 +28,31 @@ public class AnswerStat {
     /**
      * 总答题次数
      */
-    private Integer totalAnswer;
+    private Long totalAnswer = 0l;
 
     /**
      * 选择A的次数
      */
     @Column(name = "choice_a")
-    private Integer choiceA;
+    private Long choiceA = 0l;
 
     /**
      * 选择B的次数
      */
     @Column(name = "choice_b")
-    private Integer choiceB;
+    private Long choiceB = 0l;
 
     /**
      * 选择C的次数
      */
     @Column(name = "choice_c")
-    private Integer choiceC;
+    private Long choiceC = 0l;
 
     /**
      * 选择D的次数
      */
     @Column(name = "choice_d")
-    private Integer choiceD;
+    private Long choiceD = 0l;
 
     /**
      * 备注

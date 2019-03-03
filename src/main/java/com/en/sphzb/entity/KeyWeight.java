@@ -3,6 +3,8 @@ package com.en.sphzb.entity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -19,6 +21,7 @@ public class KeyWeight {
      * 关键词ID
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long keyId;
 
     /**
@@ -29,12 +32,12 @@ public class KeyWeight {
     /**
      * 类型ID
      */
-    private Long typeId;
+    private Integer typeId;
 
     /**
      * 权重值
      */
-    private String weight;
+    private Double weight;
 
     /**
      * 创建时间

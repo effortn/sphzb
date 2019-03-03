@@ -4,6 +4,8 @@ import com.en.sphzb.entity.KeyWeight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 关键字权重表持久层
  * create by en
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface KeyWeightRepository extends JpaRepository<KeyWeight, Long> {
+
+    List<KeyWeight> findAllByKeyContent(String key);
 }

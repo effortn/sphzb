@@ -54,10 +54,9 @@ public class QuestionServiceImpl implements QuestionService {
         int count = answerStatMapper.count();
         if (count == 0)
             count = 1;
-        int begin = (page -  1) * size + 1;
-        int end = page * size;
-        List<AnswerStatVO> answerStatVOList = answerStatMapper.selectStatByPage(begin, end);
-        PageImpl<AnswerStatVO> result = new PageImpl<>(answerStatVOList, PageRequest.of(page, size), count);
+        int begin = (page -  1) * size;
+        List<AnswerStatVO> answerStatVOList = answerStatMapper.selectStatByPage(begin, size);
+        PageImpl<AnswerStatVO> result = new PageImpl<>(answerStatVOList, PageRequest.of(page - 1, size), count);
         return result;
     }
 

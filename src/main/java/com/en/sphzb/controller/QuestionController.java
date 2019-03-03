@@ -42,15 +42,20 @@ public class QuestionController {
     }
 
     @PostMapping(value = "commit")
-    public ResultVO commitAnswer(Long questionId, String answer, HttpServletRequest httpServletRequest) {
+    public ModelAndView commitAnswer(Long questionId, String answer, HttpServletRequest httpServletRequest) {
+        ModelAndView mv = new ModelAndView("commit");
         String ip = httpServletRequest.getRemoteAddr();
         if (StringUtils.isEmpty(ip))
             ip = "0.0.0.0";
         AnswerRecord answerRecord = questionService.saveAnswer(ip, null, questionId, answer);
+        ResultVO resultVO = null;
         if (answerRecord == null) {
-            return new ResultVO(1, "保存失败");
+            resultVO = new ResultVO(1, "保存失败");
+        } else {
+            resultVO = new ResultVO(0, "保存成功");
         }
-        return new ResultVO(0, "保存成功");
+        mv.addObject("result", resultVO);
+        return mv;
     }
 
     @GetMapping(value = "stat")

@@ -44,25 +44,25 @@ public class AnswerStatService {
             } else {
                 answerStat = new AnswerStat();
                 answerStat.setQuestionId(Long.parseLong(questionId));
-                answerStat.setStatId((long) i);
                 statResult.put(questionId, answerStat);
             }
+            Long c = (Long) answerStatMap.get("c");
+            answerStat.setTotalAnswer(answerStat.getTotalAnswer() + c);
             if (answerStatMap.get("answer") == null || answerStatMap.get("answer").equals("")) {
-                answerStat.setTotalAnswer((Integer)answerStatMap.get("c"));
                 continue;
             }
-            switch ((char)answerStatMap.get("answer")) {
+            switch (answerStatMap.get("answer").toString().charAt(0)) {
                 case 'A' :
-                    answerStat.setChoiceA((Integer)answerStatMap.get("c"));
+                    answerStat.setChoiceA(c);
                     break;
                 case 'B' :
-                    answerStat.setChoiceB((Integer)answerStatMap.get("c"));
+                    answerStat.setChoiceB(c);
                     break;
                 case 'C' :
-                    answerStat.setChoiceC((Integer)answerStatMap.get("c"));
+                    answerStat.setChoiceC(c);
                     break;
                 case 'D' :
-                    answerStat.setChoiceD((Integer)answerStatMap.get("c"));
+                    answerStat.setChoiceD(c);
                     break;
             }
         }

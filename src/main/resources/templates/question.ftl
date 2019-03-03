@@ -8,7 +8,7 @@
 <body>
 	<div class="form">
 		<form action="/sphzb/question/commit" method="post">
-			<input style="display: none" value="${question.questionId}">
+			<input style="display: none" name="questionId" value="${question.questionId}">
 			<p class="description">${question.questionContent}</p>
 			<input type="radio" name="answer" value="A"><label>A&nbsp;${question.answerA}</label>&nbsp;&nbsp;&nbsp;
 			<input type="radio" name="answer" value="B"><label>B&nbsp;${question.answerB}</label>&nbsp;&nbsp;&nbsp;

@@ -6,11 +6,7 @@ USE sphzb;
 
 -- 创建案件表
 create table `cases` (
-<<<<<<< HEAD
   case_id BIGINT NOT NULL AUTO_INCREMENT COMMENT '案件ID',
-=======
-  `case_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '案件ID',
->>>>>>> 2991ad825f826d5057bab562fe48c2ce836f9b5e
   case_code VARCHAR(64) NOT NULL COMMENT '案件编号',
   case_description VARCHAR(4000) NOT NULL COMMENT '案件案情',
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '案件创建时间',
@@ -76,3 +72,12 @@ CREATE TABLE answer_stat (
   PRIMARY KEY (stat_id),
   key idx_question_id (question_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '答题结果统计表';
+
+-- 创建样例表
+CREATE TABLE samples (
+  sample_id int unsinged auto_increment COMMENT '样例id',
+  aymc varchar(64) NOT NULL COMMENT '案由名称',
+  ajbh varchar(64) NOT NULL COMMENT '案件编号',
+  jyaq varchar(4000) not null comment '简要案情',
+  primary key (sample_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '样例表';

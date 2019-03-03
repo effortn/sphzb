@@ -27,4 +27,6 @@ public class AnswerStatServiceMapperTest extends SphzbApplicationTests {
         Assert.assertTrue(count == 0);
     }
 
+
+
 }

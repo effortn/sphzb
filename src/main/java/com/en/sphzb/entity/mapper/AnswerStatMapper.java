@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AnswerStatMapper {
 
-    List<AnswerStatVO> selectStatByPage(@Param("begin") int begin, @Param("end") int end);
+    List<AnswerStatVO> selectStatByPage(@Param("begin") int begin, @Param("size") int size);
 
     @Select("select count(*) from answer_stat")
     int count();
