@@ -46,6 +46,7 @@ public class CaseController {
         }
     }
 
+    @ResponseBody
     @RequestMapping(value = "samples", method = RequestMethod.GET)
     public ResultVO caseUpload(String token) {
         // 判断token是否正确
