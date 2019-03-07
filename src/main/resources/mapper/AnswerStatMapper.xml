@@ -16,13 +16,15 @@
         <id column="answer_d" property="answerD" jdbcType="VARCHAR"/>
         <id column="choice_d" property="choiceD" jdbcType="INTEGER"/>
         <id column="remark" property="remark" jdbcType="VARCHAR"/>
+        <id column="case_description" property="casesDescription" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectStatByPage" resultMap="answerStatVO">
         SELECT
 	      a.stat_id,a.question_id,q.question_content,a.total_answer,a.choice_a, a.choice_b, a.choice_c,a.choice_d,
-	      q.answer_a,q.answer_b,q.answer_c,q.answer_d,a.remark
-        FROM answer_stat a, question q
+	      q.answer_a,q.answer_b,q.answer_c,q.answer_d,a.remark,t.case_description
+        FROM answer_stat a, question q,cases t
         WHERE a.question_id = q.question_id
+        and q.case_id = t.case_id
         ORDER BY a.total_answer desc
         limit #{begin}, #{size}
     </select>
