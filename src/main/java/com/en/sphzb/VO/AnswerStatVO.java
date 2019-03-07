@@ -24,7 +24,10 @@ public class AnswerStatVO {
      * 题目内容
      **/
     private String questionContent;
-
+    /**
+     * 原题内容
+     **/
+    private String casesDescription;
     /**
      * 总答题次数
      */
