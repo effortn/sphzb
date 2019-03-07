@@ -1,54 +1,62 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>答题统计</title>
-	<link rel="stylesheet" type="text/css" href="/sphzb/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>答题统计</title>
+    <link rel="stylesheet" type="text/css" href="/sphzb/css/bootstrap.min.css">
 </head>
 <body>
 <#--主要内容content-->
 <div id="page-content-wrapper" style="margin-top: 20px">
-	<div class="container-fluid">
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<table class="table table-bordered table-condensed" summary="答题结果统计">
-					<thead>
-					<tr>
-						<th>题目</th>
-						<th>总次数</th>
-						<th>选项A</th>
-						<th>选A次</th>
-						<th>选项B</th>
-						<th>选B次</th>
-						<th>选项C</th>
-                        <th>选C次</th>
-                        <th>选项D</th>
-                        <th>选D次</th>
-					</tr>
-					</thead>
-					<tbody>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-bordered table-condensed" summary="答题结果统计">
+                    <thead>
+                    <tr>
+                        <th style="width: 50%">题目</th>
+                        <th style="width: 10%">选项</th>
+                        <th style="width: 10%">选项内容</th>
+                        <th style="width: 10%">次数</th>
+                        <th style="width: 20%">结论</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
 					<#list statPage.content as statVO>
-					<tr>
-						<td title="${statVO.questionContent}" onclick="showDescription(this, this.title)" style="color: #9d9d9d;"><a>(查看案情，点击显示)</a></td>
-						<td>${statVO.totalAnswer}</td>
-						<td>${statVO.answerA}</td>
-						<td>${statVO.choiceA}</td>
-						<td>${statVO.answerB}</td>
+                    <tr>
+                        <td rowspan="2"><font style="color: #8a6d3b;font-weight: bold">原题:</font>${statVO.casesDescription}</td>
+                        <td>A</td>
+                        <td>${statVO.answerA}</td>
+                        <td>${statVO.choiceA}</td>
+                        <td rowspan="4">结论</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>${statVO.answerB}</td>
                         <td>${statVO.choiceB}</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><span style="color: #23527c">
+                            <font style="font-weight: bold">打码题:</font>
+							${statVO.questionContent}</span></td>
+                        <td>C</td>
                         <td>${statVO.answerC}</td>
                         <td>${statVO.choiceC}</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
                         <td>${statVO.answerD}</td>
                         <td>${statVO.choiceD}</td>
-					</tr>
+                    </tr>
 					</#list>
-					</tbody>
-				</table>
-			</div>
+                    </tbody>
+                </table>
+            </div>
 
-			<#--分页-->
-			<div class="col-md-12 column">
-				<ul class="pagination pull-right">
+		<#--分页-->
+            <div class="col-md-12 column">
+                <ul class="pagination pull-right">
 					<#if currentPage lte 1>
 					<li class="disabled"><a href="#">上一页</a></li>
 					<#else>
@@ -66,16 +74,16 @@
 					<#if currentPage gte statPage.getTotalPages()>
 						<li class="disabled"><a href="#">下一页</a></li>
 					<#else>
-						<li><a href="/sphzb/question/stat?page=${currentPage + 1}&size=${size}">下一页</a></li>
+						<li><a href="/sphzb/question/stat2?page=${currentPage + 1}&size=${size}">下一页</a></li>
 					</#if>
-				</ul>
-			</div>
-		</div>
-	</div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
-	function showDescription(dom, desr) {
-		dom.innerHTML = desr;
+    function showDescription(dom, desr) {
+        dom.innerHTML = desr;
     }
 </script>
 </body>
