@@ -1,20 +1,19 @@
 package com.en.sphzb.service;
 
 import com.en.sphzb.entity.AnswerStat;
+import com.en.sphzb.entity.Question;
 import com.en.sphzb.entity.mapper.AnswerRecordMapper;
 import com.en.sphzb.entity.mapper.AnswerStatMapper;
 import com.en.sphzb.repository.AnswerRecordRepository;
 import com.en.sphzb.repository.AnswerStatRepository;
 import com.en.sphzb.repository.CaseRepository;
+import com.en.sphzb.repository.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 答案统计服务
@@ -29,6 +28,9 @@ public class AnswerStatService {
 
     @Autowired
     private AnswerStatRepository answerStatRepository;
+
+    @Autowired
+    private QuestionsRepository questionsRepository;
 
     @Transactional
     @Scheduled(cron = "0 0 0 * * ?")
@@ -66,8 +68,42 @@ public class AnswerStatService {
                     break;
             }
         }
+        List<AnswerStat> result = new ArrayList<>(statResult.values());
+        result.forEach( x -> {
+            // 1. 若超过十次未提交答案，视为作废体
+            if (x.getTotalAnswer() - x.getChoiceA() - x.getChoiceB() - x.getChoiceC() - x.getChoiceD() > 10) {
+                x.setRemark("该题超过十次未提交答案，视为作废!");
+                Optional<Question> question = questionsRepository.findById(x.getQuestionId());
+                if (question.isPresent()) {
+                    question.get().setStatus(0);
+                    questionsRepository.save(question.get());
+                }
+                return;
+            }
+            // 2. 判断是否已有正确答案，答案的答题次数占比是否超过 80%
+            long max = x.getChoiceA();
+//            String choice = "最多选项没有超过80%占比，尚没有正确答案";
+            String choice = "A";
+            if (max < x.getChoiceB()) {
+                choice = "B";
+                max = x.getChoiceB();
+            }
+            if (max < x.getChoiceC()) {
+                choice = "C";
+                max = x.getChoiceC();
+            }
+            if (max < x.getChoiceD()) {
+                choice = "D";
+                max = x.getChoiceD();
+            }
+            if (((double)max / (double)x.getTotalAnswer()) >= 0.8) {
+                x.setRemark(choice + "超过总答题次数80%占比，为正确答案");
+            } else {
+                x.setRemark("最多选项没有超过80%占比，尚没有正确答案");
+            }
+        });
         answerStatRepository.deleteAll();
-        answerStatRepository.saveAll(new ArrayList<>(statResult.values()));
+        answerStatRepository.saveAll(result);
     }
 
 }

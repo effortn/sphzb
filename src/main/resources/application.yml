@@ -21,7 +21,7 @@ mybatis:
 logging:
   pattern:
     console: "%d - %msg%n"
-#  path: /var/log/tomcat/
-#  file: /var/log/tomcat/sell.log
+  path: log/
+  file: log/sphzb.log
   level:
     com.en.sphzb: debug

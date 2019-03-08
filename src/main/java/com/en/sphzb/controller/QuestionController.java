@@ -5,6 +5,7 @@ import com.en.sphzb.VO.ResultVO;
 import com.en.sphzb.entity.AnswerRecord;
 import com.en.sphzb.entity.AnswerStat;
 import com.en.sphzb.entity.Question;
+import com.en.sphzb.service.AnswerStatService;
 import com.en.sphzb.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,10 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +30,9 @@ public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private AnswerStatService answerStatService;
 
     @GetMapping(value = "")
     public ModelAndView index() {
@@ -67,6 +68,18 @@ public class QuestionController {
         map.put("currentPage", page);
         map.put("size", size);
         return new ModelAndView("stat", map);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "toStat", method = RequestMethod.GET)
+    public ResultVO caseUpload(String token) {
+        // 判断token是否正确
+        if ("stf-wt".equals(token)) {
+            answerStatService.stat();
+            return new ResultVO(0, "权重计算完成！");
+        } else {
+            return new ResultVO(0, "没有权限！");
+        }
     }
 
 }
