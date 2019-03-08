@@ -49,7 +49,7 @@ public class CaseToQuestionService {
      *  异步服务，可以在案件上传后调用
      */
     @Scheduled(cron = "0 0 0/5 * * ?")      //  定时任务，每隔五小时执行一次
-    @Async          // 异步调用注解，此方法可以进行异步调用
+//    @Async          // 异步调用注解，此方法可以进行异步调用
     public void parseQuestion() {
         log.info("【案件转换为题目】服务开始进行！");
         // 1. 查询所有权重值，加载至内存
