@@ -70,7 +70,12 @@ public class AnswerStatService {
         }
         List<AnswerStat> result = new ArrayList<>(statResult.values());
         result.forEach( x -> {
-            // 1. 若超过十次未提交答案，视为作废体
+            // 1. 若答题总次数小于5次，不计算正确答案
+            if (x.getTotalAnswer() < 5) {
+                x.setRemark("该题答题次数小于5次，未能计算正确答案!");
+                return;
+            }
+            // 2. 若超过十次未提交答案，视为作废体
             if (x.getTotalAnswer() - x.getChoiceA() - x.getChoiceB() - x.getChoiceC() - x.getChoiceD() > 10) {
                 x.setRemark("该题超过十次未提交答案，视为作废!");
                 Optional<Question> question = questionsRepository.findById(x.getQuestionId());
@@ -80,7 +85,7 @@ public class AnswerStatService {
                 }
                 return;
             }
-            // 2. 判断是否已有正确答案，答案的答题次数占比是否超过 80%
+            // 3. 判断是否已有正确答案，答案的答题次数占比是否超过 80%
             long max = x.getChoiceA();
 //            String choice = "最多选项没有超过80%占比，尚没有正确答案";
             String choice = "A";
