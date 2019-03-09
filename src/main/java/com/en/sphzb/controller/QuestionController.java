@@ -61,8 +61,8 @@ public class QuestionController {
 
     @GetMapping(value = "stat")
     public ModelAndView stat(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "size", defaultValue = "10") Integer size,
-                       Map<String, Object> map){
+                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                             Map<String, Object> map) {
         Page<AnswerStatVO> stat = questionService.getStat(page, size);
         map.put("statPage", stat);
         map.put("currentPage", page);
@@ -81,5 +81,4 @@ public class QuestionController {
             return new ResultVO(0, "没有权限！");
         }
     }
-
 }
