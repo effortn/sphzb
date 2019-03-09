@@ -29,7 +29,10 @@
                         <td>A</td>
                         <td>${statVO.answerA}</td>
                         <td>${statVO.choiceA}</td>
-                        <td rowspan="4">结论</td>
+
+                        <#if statVO.remark??>
+                        <td rowspan="4">${statVO.remark}</td>
+                        </#if>
                     </tr>
                     <tr>
                         <td>B</td>
